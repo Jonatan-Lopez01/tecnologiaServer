@@ -1,0 +1,6 @@
+PORTSERVER = 3000
+NAME_DATABASE = "tecnologia"
+
+DATABASE_URL="mysql://root:@localhost:3306/tecnologia?connection_limit=15&socket_timeout=20"
+JWT_SECRET_KEY = "tu clave secreta"
+MODO_DESARROLLO = "desarrollo"
