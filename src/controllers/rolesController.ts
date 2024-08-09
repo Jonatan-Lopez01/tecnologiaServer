@@ -76,7 +76,7 @@ class RolesController {
             res.status(500).json({ error: 'Error al eliminar el rol' });
         }
     }
-    async disableRole(req: Request, res: Response): Promise<void> {
+    async disabledRole(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         try {
             const role = await prisma.roles.update({
@@ -89,7 +89,7 @@ class RolesController {
             res.status(500).json({ error: 'Error al deshabilitar el rol' });
         }
     }
-    async enableRole(req: Request, res: Response): Promise<void> {
+    async enabledRole(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         try {
             const role = await prisma.roles.update({

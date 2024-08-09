@@ -17,8 +17,8 @@ class UsersRoutes {
         this.router.post('/createUser', usersController.createUser);
         this.router.put('/updateUser/:id', usersController.updateUser);
         this.router.delete('/deleteUser/:id', usersController.deleteUser);
-        this.router.put('/disableUser/:id', usersController.disableUser);
-        this.router.put('/enableUser/:id', usersController.enableUser);
+        this.router.put('/disabledUser/:id', usersController.disabledUser);
+        this.router.put('/enabledUser/:id', usersController.enabledUser);
     }
 }
 

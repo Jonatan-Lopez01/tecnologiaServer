@@ -8,6 +8,8 @@ const cors_1 = __importDefault(require("cors")); // Importar CORS
 const rolesRoutes_1 = __importDefault(require("./routes/rolesRoutes"));
 const usersRoutes_1 = __importDefault(require("./routes/usersRoutes"));
 const loginRoutes_1 = __importDefault(require("./routes/loginRoutes"));
+const ofertasRoutes_1 = __importDefault(require("./routes/ofertasRoutes"));
+const categoriasRoutes_1 = __importDefault(require("./routes/categoriasRoutes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser")); // Importa cookie-parser
 const morgan_1 = __importDefault(require("morgan")); // Importa morgan
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -26,9 +28,11 @@ class Server {
         this.app.use((0, morgan_1.default)('combined')); // Registra solicitudes HTTP usando el formato 'combined'
     }
     routes() {
+        this.app.use('/api', loginRoutes_1.default);
         this.app.use('/api/roles', rolesRoutes_1.default);
         this.app.use('/api/users', usersRoutes_1.default);
-        this.app.use('/api', loginRoutes_1.default);
+        this.app.use('/api/ofertas', ofertasRoutes_1.default);
+        this.app.use('/api/ofertas', categoriasRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

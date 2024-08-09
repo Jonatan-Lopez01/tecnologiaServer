@@ -18,8 +18,8 @@ class UsersRoutes {
         this.router.post('/createUser', usersController_1.usersController.createUser);
         this.router.put('/updateUser/:id', usersController_1.usersController.updateUser);
         this.router.delete('/deleteUser/:id', usersController_1.usersController.deleteUser);
-        this.router.put('/disableUser/:id', usersController_1.usersController.disableUser);
-        this.router.put('/enableUser/:id', usersController_1.usersController.enableUser);
+        this.router.put('/disabledUser/:id', usersController_1.usersController.disabledUser);
+        this.router.put('/enabledUser/:id', usersController_1.usersController.enabledUser);
     }
 }
 const usersRoutes = new UsersRoutes();

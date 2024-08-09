@@ -120,7 +120,7 @@ class UsersController {
             }
         });
     }
-    disableUser(req, res) {
+    disabledUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
@@ -136,7 +136,7 @@ class UsersController {
             }
         });
     }
-    enableUser(req, res) {
+    enabledUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {

@@ -18,8 +18,8 @@ class RolesRoutes {
         this.router.post('/createRole', rolesController.createRole);
         this.router.put('/updateRole/:id', rolesController.updateRole);
         this.router.delete('/deleteRole/:id', rolesController.deleteRole);
-        this.router.put('/disableRole/:id', rolesController.disableRole);
-        this.router.put('/enableRole/:id', rolesController.enableRole);
+        this.router.put('/disabledRole/:id', rolesController.disabledRole);
+        this.router.put('/enabledRole/:id', rolesController.enabledRole);
     }
 }
 

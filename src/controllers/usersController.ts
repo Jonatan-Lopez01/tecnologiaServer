@@ -99,7 +99,7 @@ class UsersController {
             res.status(500).json({ error: 'Error al eliminar el usuario' });
         }
     }
-    async disableUser(req: Request, res: Response): Promise<void> {
+    async disabledUser(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         try {
             const user = await prisma.users.update({
@@ -112,7 +112,7 @@ class UsersController {
             res.status(500).json({ error: 'Error al deshabilitar el user' });
         }
     }
-    async enableUser(req: Request, res: Response): Promise<void> {
+    async enabledUser(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         try {
             const user = await prisma.users.update({
