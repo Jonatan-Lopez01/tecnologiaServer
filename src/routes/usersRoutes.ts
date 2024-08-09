@@ -12,8 +12,8 @@ class UsersRoutes {
     config(): void {
         this.router.use(authMiddleware); //Autenticacion para manejar estas rutas.
 
-        this.router.get('/getAll', usersController.getAllUsers);
-        this.router.get('/getOne/:id', usersController.getUserById);
+        this.router.get('/list', usersController.getAllUsers);
+        this.router.get('/listOne/:id', usersController.getUserById);
         this.router.post('/createUser', usersController.createUser);
         this.router.put('/updateUser/:id', usersController.updateUser);
         this.router.delete('/deleteUser/:id', usersController.deleteUser);

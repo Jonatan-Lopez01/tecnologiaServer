@@ -7,6 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model carritos {
+  id_carrito        Int                 @id @default(autoincrement())
+  id_user           Int
+  users             users               @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "carritos_ibfk_1")
+  productos_carrito productos_carrito[]
+
+  @@index([id_user], map: "fk_unUser_MuchosCarritos")
+}
+
+model categorias {
+  id_categoria Int         @id @default(autoincrement())
+  nombre       String      @db.VarChar(50)
+  createdAt    DateTime    @db.DateTime(0)
+  updatedAt    DateTime    @db.DateTime(0)
+  estatus      Int         @default(1) @db.SmallInt
+  productos    productos[]
+}
+
 model direcciones {
   id_direccion Int    @id @default(autoincrement())
   calle        String @db.VarChar(50)
@@ -20,6 +38,70 @@ model direcciones {
   users        users  @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "direcciones_ibfk_1")
 
   @@index([id_user], map: "fky_DireccionToUser")
+}
+
+model imagenes {
+  id_imagen       Int               @id @default(autoincrement())
+  url             String            @db.VarChar(256)
+  producto_imagen producto_imagen[]
+}
+
+model ofertas {
+  id_oferta       Int       @id @default(autoincrement())
+  id_producto     Int
+  porc_oferta     Float     @db.Float
+  fecha_inicio    DateTime  @db.DateTime(0)
+  fecha_fin       DateTime  @db.DateTime(0)
+  precio_original Float     @db.Float
+  precio_oferta   Float     @db.Float
+  descripcion     String    @db.Text
+  createdAt       DateTime  @db.DateTime(0)
+  updatedAt       DateTime  @db.DateTime(0)
+  estatus         Int       @default(1) @db.SmallInt
+  productos       productos @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, map: "ofertas_ibfk_1")
+
+  @@index([id_producto], map: "fk_unProd_unaOfert")
+}
+
+model producto_imagen {
+  id_producto_imagen Int       @id @default(autoincrement())
+  id_producto        Int
+  id_imagen          Int
+  productos          productos @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, map: "producto_imagen_ibfk_1")
+  imagenes           imagenes  @relation(fields: [id_imagen], references: [id_imagen], onDelete: Cascade, map: "producto_imagen_ibfk_2")
+
+  @@index([id_imagen], map: "fk_muchasImg_unEnlaceIndv")
+  @@index([id_producto], map: "fk_unProd_MuchosProdImg")
+}
+
+model productos {
+  id_producto       Int                 @id @default(autoincrement())
+  nombre            String              @db.VarChar(100)
+  cant_existencia   Int
+  estatus           Int                 @default(1) @db.SmallInt
+  precio_unitario   Float
+  caracteristicas   String              @db.Text
+  id_categoria      Int
+  createdAt         DateTime            @db.DateTime(0)
+  updatedAt         DateTime            @db.DateTime(0)
+  ofertas           ofertas[]
+  producto_imagen   producto_imagen[]
+  categorias        categorias          @relation(fields: [id_categoria], references: [id_categoria], onDelete: Cascade, map: "productos_ibfk_1")
+  productos_carrito productos_carrito[]
+
+  @@index([id_categoria], map: "fk_unaCate_muchosProd")
+}
+
+model productos_carrito {
+  id_productos_carrito Int       @id @default(autoincrement())
+  id_carrito           Int
+  id_producto          Int
+  cantidad             Int
+  carritos             carritos  @relation(fields: [id_carrito], references: [id_carrito], onDelete: Cascade, map: "productos_carrito_ibfk_1")
+  productos            productos @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, map: "productos_carrito_ibfk_2")
+
+  @@index([id_carrito], map: "fk_Producos_porCarrito")
+  @@index([id_producto], map: "fk_Produtos_DiferentesCarritos")
 }
 
 model roles {
@@ -42,6 +124,7 @@ model users {
   createdAt   DateTime      @db.DateTime(0)
   updatedAt   DateTime      @db.DateTime(0)
   id_rol      Int
+  carritos    carritos[]
   direcciones direcciones[]
   roles       roles         @relation(fields: [id_rol], references: [id_rol], onDelete: Cascade, map: "users_ibfk_1")
 

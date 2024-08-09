@@ -13,8 +13,8 @@ class UsersRoutes {
     }
     config() {
         this.router.use(authMiddleware_1.default); //Autenticacion para manejar estas rutas.
-        this.router.get('/getAll', usersController_1.usersController.getAllUsers);
-        this.router.get('/getOne/:id', usersController_1.usersController.getUserById);
+        this.router.get('/list', usersController_1.usersController.getAllUsers);
+        this.router.get('/listOne/:id', usersController_1.usersController.getUserById);
         this.router.post('/createUser', usersController_1.usersController.createUser);
         this.router.put('/updateUser/:id', usersController_1.usersController.updateUser);
         this.router.delete('/deleteUser/:id', usersController_1.usersController.deleteUser);

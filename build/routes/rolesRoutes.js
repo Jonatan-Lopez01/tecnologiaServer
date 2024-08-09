@@ -14,8 +14,8 @@ class RolesRoutes {
     config() {
         // Aplica el middleware de autenticación a todas las rutas
         this.router.use(authMiddleware_1.default);
-        this.router.get('/getAll', rolesController_1.rolesController.getAllRoles);
-        this.router.get('/getOne/:id', rolesController_1.rolesController.getRoleById);
+        this.router.get('/list', rolesController_1.rolesController.getAllRoles);
+        this.router.get('/listOne/:id', rolesController_1.rolesController.getRoleById);
         this.router.post('/createRole', rolesController_1.rolesController.createRole);
         this.router.put('/updateRole/:id', rolesController_1.rolesController.updateRole);
         this.router.delete('/deleteRole/:id', rolesController_1.rolesController.deleteRole);

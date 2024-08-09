@@ -13,8 +13,8 @@ class DireccionesRoutes {
         this.router.use(authMiddleware); //Autenticacion para manejar estas rutas.
 
 
-        this.router.get('/getAll', direccionesController.getAllDirecciones);
-        this.router.get('/getOne/:id', direccionesController.getDireccionById);
+        this.router.get('/list', direccionesController.getAllDirecciones);
+        this.router.get('/listOne/:id', direccionesController.getDireccionById);
         this.router.post('/createDireccion', direccionesController.createDireccion);
         this.router.put('/updateDireccion/:id', direccionesController.updateDireccion);
         this.router.delete('/deleteDireccion/:id', direccionesController.deleteDireccion);
