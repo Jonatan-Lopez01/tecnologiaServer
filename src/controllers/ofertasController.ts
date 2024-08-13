@@ -8,6 +8,7 @@ class OfertasController {
             const ofertas = await prisma.ofertas.findMany();
             res.json(ofertas);
         } catch (err) {
+            console.log("Error al obtener ofertas: ", err);
             res.status(500).json({ error: 'Error al obtener las ofertas' });
         }
     }
@@ -22,9 +23,10 @@ class OfertasController {
             if (oferta) {
                 res.json(oferta);
             } else {
-                res.status(404).json({ error: 'Oferta no encontrada' });
+                res.status(400).json({ error: 'Oferta no encontrada' });
             }
         } catch (err) {
+            console.log("Error al obtener la oferta: ", err);
             res.status(500).json({ error: 'Error al obtener la oferta' });
         }
     }
@@ -73,6 +75,7 @@ class OfertasController {
             });
             res.json(updatedOferta);
         } catch (err) {
+            console.log("Error al actualizar la oferta: ", err);
             res.status(500).json({ error: 'Error al actualizar la oferta' });
         }
     }
@@ -86,6 +89,7 @@ class OfertasController {
             });
             res.json({ message: 'Oferta eliminada exitosamente' });
         } catch (err) {
+            console.log("Error al eliminar la oferta: ", err);
             res.status(500).json({ error: 'Error al eliminar la oferta' });
         }
     }

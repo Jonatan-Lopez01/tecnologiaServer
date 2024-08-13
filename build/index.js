@@ -32,7 +32,7 @@ class Server {
         this.app.use('/api/roles', rolesRoutes_1.default);
         this.app.use('/api/users', usersRoutes_1.default);
         this.app.use('/api/ofertas', ofertasRoutes_1.default);
-        this.app.use('/api/ofertas', categoriasRoutes_1.default);
+        this.app.use('/api/categorias', categoriasRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

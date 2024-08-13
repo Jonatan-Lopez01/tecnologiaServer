@@ -9,6 +9,7 @@ class UsersController {
             const users = await prisma.users.findMany();
             res.json(users);
         } catch (err) {
+            console.error('Error al obtener usuarios:', err);
             res.status(500).json({ error: 'Error al obtener usuarios' });
         }
     }
@@ -22,9 +23,10 @@ class UsersController {
             if (user) {
                 res.json(user);
             } else {
-                res.status(404).json({ error: 'Usuario no encontrado' });
+                res.status(400).json({ error: 'Usuario no encontrado' });
             }
         } catch (err) {
+            console.error('Error al obtener el usuario:', err);
             res.status(500).json({ error: 'Error al obtener el usuario' });
         }
     }
@@ -62,6 +64,7 @@ class UsersController {
             // Enviar la respuesta con el nuevo usuario
             res.json(newUser);
         } catch (err) {
+            console.error('Error al crear un usuario:', err);
             res.status(500).json({ error: 'Error al crear el usuario' });
         }
     }
@@ -84,6 +87,7 @@ class UsersController {
             });
             res.json(updatedUser);
         } catch (err) {
+            console.error('Error al actualizar el:', err);
             res.status(500).json({ error: 'Error al actualizar el usuario' });
         }
     }
@@ -96,6 +100,7 @@ class UsersController {
             });
             res.json({ message: 'Usuario eliminado exitosamente' });
         } catch (err) {
+            console.error('Error al eliminar el usuario:', err);
             res.status(500).json({ error: 'Error al eliminar el usuario' });
         }
     }

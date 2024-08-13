@@ -7,6 +7,7 @@ class RolesController {
             const roles = await prisma.roles.findMany();
             res.json(roles);
         } catch (err) {
+            console.log("Error al obtener roles: ", err);
             res.status(500).json({ error: 'Error al obtener roles' });
         }
     }
@@ -20,9 +21,10 @@ class RolesController {
             if (role) {
                 res.json(role);
             } else {
-                res.status(404).json({ error: 'Rol no encontrado' });
+                res.status(400).json({ error: 'Rol no encontrado' });
             }
         } catch (err) {
+            console.log("Error al obtener el rol: ", err);
             res.status(500).json({ error: 'Error al obtener el rol' });
         }
     }
@@ -61,6 +63,7 @@ class RolesController {
             });
             res.json(updatedRole);
         } catch (err) {
+            console.log("Error al actualizar el rol: ", err);
             res.status(500).json({ error: 'Error al actualizar el rol' });
         }
     }
@@ -73,6 +76,7 @@ class RolesController {
             });
             res.json({ message: 'Rol eliminado exitosamente' });
         } catch (err) {
+            console.log("Error al eliminar el rol: ", err);
             res.status(500).json({ error: 'Error al eliminar el rol' });
         }
     }

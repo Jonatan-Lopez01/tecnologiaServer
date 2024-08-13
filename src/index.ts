@@ -5,6 +5,8 @@ import usersRoutes from './routes/usersRoutes';
 import loginRoutes from './routes/loginRoutes';
 import ofertasRoutes from './routes/ofertasRoutes';
 import categoriasRoutes from './routes/categoriasRoutes';
+import direccionesRoutes from './routes/direccionesRoutes';
+import productoImagenRoutes from './routes/productoImagenRoutes';
 import cookieParser from 'cookie-parser'; // Importa cookie-parser
 import morgan from 'morgan'; // Importa morgan
 import dotenv from 'dotenv';
@@ -31,9 +33,10 @@ class Server {
         this.app.use('/api', loginRoutes);
         this.app.use('/api/roles', rolesRoutes);
         this.app.use('/api/users', usersRoutes);
+        this.app.use('/api/direcciones',direccionesRoutes);
         this.app.use('/api/ofertas',ofertasRoutes);
-        this.app.use('/api/ofertas',categoriasRoutes);
-
+        this.app.use('/api/categorias',categoriasRoutes);
+        this.app.use('/api/productoImagen', productoImagenRoutes);
     }
 
     start(): void {

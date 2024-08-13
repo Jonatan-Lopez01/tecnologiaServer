@@ -14,7 +14,7 @@ class Login {
             });
 
             if (!userDb) {
-                res.status(404).json({ error: 'Usuario no encontrado' });
+                res.status(400).json({ error: 'Credenciales invalidas' });
                 return;
             }
 
@@ -22,7 +22,7 @@ class Login {
             const isPasswordValid = await encriptacion.validatePassword(password, userDb.password);
 
             if (!isPasswordValid) {
-                res.status(401).json({ error: 'Contraseña incorrecta' });
+                res.status(400).json({ error: 'Credenciales invalidas' });
                 return;
             }
 
@@ -41,7 +41,8 @@ class Login {
             const { password: _, ...user } = userDb;//Eliminamos el campos de password.
             res.json({ message: 'Inicio de sesión exitoso',user
              });
-        } catch (error) {
+        } catch (err) {
+            console.log("Error al iniciar sesión:", err);
             res.status(500).json({ error: 'Error al iniciar sesión' });
         }
     }
@@ -55,7 +56,8 @@ class Login {
             });
 
             res.json({ message: 'Sesión cerrada exitosamente' });
-        } catch (error) {
+        } catch (err) {
+            console.log("Error al cerrar sesión: ", err);
             res.status(500).json({ error: 'Error al cerrar sesión' });
         }
     }
@@ -93,10 +95,10 @@ class Login {
             // Enviar la respuesta con el nuevo usuario
             res.json(newUser);
         } catch (err) {
-            res.status(500).json({ error: 'Error al crear el usuario' });
+            console.log("Error al registrarse:", err);
+            res.status(500).json({ error: 'Error al registrarse:' });
         }
     }
 }
 
-const loginController = new Login();
-export default loginController;
+export const loginController  = new Login();

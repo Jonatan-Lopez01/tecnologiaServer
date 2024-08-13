@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import loginController from '../controllers/loginController';
+import {loginController} from '../controllers/loginController';
 
 class LoginRoutes {
     public router: Router = Router();
