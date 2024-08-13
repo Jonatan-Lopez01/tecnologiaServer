@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loginController = void 0;
 const prismaClient_1 = __importDefault(require("../prismaClient")); // Importa PrismaClient
 const auth_1 = __importDefault(require("../seguridad/auth")); // Importa la clase de autenticación
 const encriptacion_1 = __importDefault(require("../seguridad/encriptacion"));
@@ -36,13 +37,13 @@ class Login {
                     where: { email }
                 });
                 if (!userDb) {
-                    res.status(404).json({ error: 'Usuario no encontrado' });
+                    res.status(400).json({ error: 'Credenciales invalidas' });
                     return;
                 }
                 // Verificar la contraseña
                 const isPasswordValid = yield encriptacion_1.default.validatePassword(password, userDb.password);
                 if (!isPasswordValid) {
-                    res.status(401).json({ error: 'Contraseña incorrecta' });
+                    res.status(400).json({ error: 'Credenciales invalidas' });
                     return;
                 }
                 // Crear un token de acceso
@@ -59,7 +60,8 @@ class Login {
                 res.json({ message: 'Inicio de sesión exitoso', user
                 });
             }
-            catch (error) {
+            catch (err) {
+                console.log("Error al iniciar sesión:", err);
                 res.status(500).json({ error: 'Error al iniciar sesión' });
             }
         });
@@ -74,7 +76,8 @@ class Login {
                 });
                 res.json({ message: 'Sesión cerrada exitosamente' });
             }
-            catch (error) {
+            catch (err) {
+                console.log("Error al cerrar sesión: ", err);
                 res.status(500).json({ error: 'Error al cerrar sesión' });
             }
         });
@@ -110,10 +113,10 @@ class Login {
                 res.json(newUser);
             }
             catch (err) {
-                res.status(500).json({ error: 'Error al crear el usuario' });
+                console.log("Error al registrarse:", err);
+                res.status(500).json({ error: 'Error al registrarse:' });
             }
         });
     }
 }
-const loginController = new Login();
-exports.default = loginController;
+exports.loginController = new Login();

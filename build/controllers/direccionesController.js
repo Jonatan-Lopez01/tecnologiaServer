@@ -22,6 +22,7 @@ class DireccionesController {
                 res.json(direcciones);
             }
             catch (err) {
+                console.log("Error al obtener direcciones: ", err);
                 res.status(500).json({ error: 'Error al obtener direcciones' });
             }
         });
@@ -37,10 +38,11 @@ class DireccionesController {
                     res.json(direccion);
                 }
                 else {
-                    res.status(404).json({ error: 'Dirección no encontrada' });
+                    res.status(400).json({ error: 'Dirección no encontrada' });
                 }
             }
             catch (err) {
+                console.log("Error al obtener la direccion: ", err);
                 res.status(500).json({ error: 'Error al obtener la dirección' });
             }
         });
@@ -64,6 +66,7 @@ class DireccionesController {
                 res.json(newDireccion);
             }
             catch (err) {
+                console.log("Error al crear la direccion: ", err);
                 res.status(500).json({ error: 'Error al crear la dirección' });
             }
         });
@@ -89,6 +92,7 @@ class DireccionesController {
                 res.json(updatedDireccion);
             }
             catch (err) {
+                console.log("Error al actualizar la direccion: ", err);
                 res.status(500).json({ error: 'Error al actualizar la dirección' });
             }
         });
@@ -103,6 +107,7 @@ class DireccionesController {
                 res.json({ message: 'Dirección eliminada exitosamente' });
             }
             catch (err) {
+                console.log("Error al eliminar la direccion: ", err);
                 res.status(500).json({ error: 'Error al eliminar la dirección' });
             }
         });

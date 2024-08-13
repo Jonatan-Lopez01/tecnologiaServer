@@ -24,7 +24,7 @@ class ProductoImagenController {
                         id_imagen,
                     },
                 });
-                res.status(200).json(newProductoImagen);
+                res.json(newProductoImagen);
             }
             catch (err) {
                 console.error('Error al crear producto_imagen: ', err);
@@ -37,7 +37,7 @@ class ProductoImagenController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const productoImagenes = yield prisma.producto_imagen.findMany();
-                res.status(200).json(productoImagenes);
+                res.json(productoImagenes);
             }
             catch (err) {
                 console.error('Error al listar producto_imagenes: ', err);
@@ -54,10 +54,10 @@ class ProductoImagenController {
                     where: { id_producto_imagen: Number(id) }
                 });
                 if (!productoImagen) {
-                    res.status(404).json({ error: 'ProductoImagen no encontrado' });
+                    res.status(400).json({ error: 'ProductoImagen no encontrado' });
                     return;
                 }
-                res.status(200).json(productoImagen);
+                res.json(productoImagen);
             }
             catch (err) {
                 console.error('Error al buscar producto_imagen', err);
@@ -78,7 +78,7 @@ class ProductoImagenController {
                         id_imagen,
                     }
                 });
-                res.status(200).json(updatedProductoImagen);
+                res.json(updatedProductoImagen);
             }
             catch (err) {
                 console.error('Error al actualizar producto_imagenes: ', err);
@@ -94,7 +94,7 @@ class ProductoImagenController {
                 yield prisma.producto_imagen.delete({
                     where: { id_producto_imagen: Number(id) },
                 });
-                res.status(200).json({ message: 'Rol eliminado exitosamente' });
+                res.json({ message: 'Rol eliminado exitosamente' });
             }
             catch (err) {
                 console.error('Error al borrar producto_imagenes: ', err);

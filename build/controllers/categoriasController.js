@@ -23,6 +23,7 @@ class CategoriasController {
                 res.json(categorias);
             }
             catch (err) {
+                console.log("Error al obtener las categorias: ", err);
                 res.status(500).json({ error: 'Error al obtener las categorías' });
             }
         });
@@ -39,10 +40,11 @@ class CategoriasController {
                     res.json(categoria);
                 }
                 else {
-                    res.status(404).json({ error: 'Categoría no encontrada' });
+                    res.status(400).json({ error: 'Categoría no encontrada' });
                 }
             }
             catch (err) {
+                console.log("Error al obtener la categoria: ", err);
                 res.status(500).json({ error: 'Error al obtener la categoría' });
             }
         });
@@ -83,6 +85,7 @@ class CategoriasController {
                 res.json(updatedCategoria);
             }
             catch (err) {
+                console.log("Error al actualizar la categoria: ", err);
                 res.status(500).json({ error: 'Error al actualizar la categoría' });
             }
         });
@@ -98,6 +101,7 @@ class CategoriasController {
                 res.json({ message: 'Categoría eliminada exitosamente' });
             }
             catch (err) {
+                console.log("Error al eliminar la categoria: ", err);
                 res.status(500).json({ error: 'Error al eliminar la categoría' });
             }
         });

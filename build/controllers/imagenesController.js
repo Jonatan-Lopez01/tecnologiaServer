@@ -13,8 +13,8 @@ exports.imagenesController = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 class ImagenesController {
-    // Crear una nueva imagen, tabajr para 
-    create(req, res) {
+    // Crear una nueva imagen.
+    createImage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { url } = req.body;
@@ -32,11 +32,11 @@ class ImagenesController {
         });
     }
     // Obtener todas las imágenes
-    getAll(req, res) {
+    getAllImages(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const imagenes = yield prisma.imagenes.findMany();
-                res.status(200).json(imagenes);
+                res.json(imagenes);
             }
             catch (err) {
                 console.error('Error al listar imagenes: ', err);
@@ -45,7 +45,7 @@ class ImagenesController {
         });
     }
     // Obtener una imagen por id
-    getById(req, res) {
+    getImageById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = req.params;
@@ -53,10 +53,10 @@ class ImagenesController {
                     where: { id_imagen: Number(id) }
                 });
                 if (!imagen) {
-                    res.status(404).json({ error: 'Imagen not found' });
+                    res.status(400).json({ error: 'Imagen no encontrada.' });
                     return;
                 }
-                res.status(200).json(imagen);
+                res.json(imagen);
             }
             catch (err) {
                 console.error('Error al listar una imagen: ', err);
@@ -65,7 +65,7 @@ class ImagenesController {
         });
     }
     // Actualizar una imagen por id
-    update(req, res) {
+    updateImage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = req.params;
@@ -76,7 +76,7 @@ class ImagenesController {
                         url,
                     }
                 });
-                res.status(200).json(updatedImagen);
+                res.json(updatedImagen);
             }
             catch (err) {
                 console.error('Error al actualizar una imagen: ', err);
@@ -85,17 +85,18 @@ class ImagenesController {
         });
     }
     // Eliminar una imagen por id
-    delete(req, res) {
+    deleteImage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { id } = req.params;
                 yield prisma.imagenes.delete({
                     where: { id_imagen: Number(id) },
                 });
-                res.status(204).send();
+                res.json({ error: 'Imagen eliminada exitosamente.' });
             }
-            catch (error) {
-                res.status(500).json({ error: 'Error deleting imagen' });
+            catch (err) {
+                console.error('Error al eliminar la imagen: ', err);
+                res.status(500).json({ error: 'Error al eliminar la imagen:' });
             }
         });
     }
